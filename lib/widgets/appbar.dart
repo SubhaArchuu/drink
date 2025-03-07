@@ -1,3 +1,4 @@
+import 'package:drink_control/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../common/asset_image_path.dart';
@@ -29,11 +30,15 @@ class AppbarWidget extends StatelessWidget {
           ),
           if (profile) Padding(
             padding: const EdgeInsets.only(right: 10),
-            child: CircleAvatar(
-              backgroundImage: AssetImage(AssetImgPath
-                  .userProfile),
-              radius: 18,
-              backgroundColor: Colors.white
+            child: IconButton(
+              icon: CircleAvatar(
+                backgroundImage: AssetImage(AssetImgPath
+                    .userProfile),
+                radius: 18,
+                backgroundColor: Colors.white
+              ), onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => MyProfileApp()));
+            },
             ),
           ),
         ],
