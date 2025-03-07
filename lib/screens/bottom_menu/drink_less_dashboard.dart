@@ -1,60 +1,80 @@
+import 'dart:ui';
+
+import 'package:drink_control/common/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fl_chart/fl_chart.dart';
-import '../bloc/drink_counter_bloc/drink_counter_bloc.dart';
+import '../../bloc/drink_counter_bloc/drink_counter_bloc.dart';
+import '../../widgets/action_grid.dart';
+import '../../widgets/appbar.dart';
+import '../../widgets/progress_widget.dart';
+
 
 
 class DrinkLessDashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return
-      Scaffold(
-        backgroundColor: Colors.blue.shade900,
-        appBar: AppBar(
-          title: Text("Drink Less"),
-          backgroundColor: Colors.blue.shade900,
-          elevation: 0,
-        ),
-        body:
-            BlocBuilder<DrinkCounterBloc, DrinkCounterState>(
-            builder: (context, state) {
-    return
-    SingleChildScrollView(
-    child: Column(
-    crossAxisAlignment: CrossAxisAlignment.center,
-    children: [
-    SizedBox(height: 10),
+        AppbarWidget(
+          title: Strings.dashboard_screen,
+          search: true,
+          profile: true,
+          child: Stack(
+            children: [
+          // 🎨 Gradient Background
+          Container(
+          decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Colors.blue.shade900, Colors.deepPurple.shade900],
+          ),
+                ),
+              ),
 
-    // Progress Indicator
-    _progressIndicator(),
+              BlocBuilder<DrinkCounterBloc, DrinkCounterState>(
+              builder: (context, state) {
+                double progress = (state.count / 10).clamp(0.0, 1.0); // dynamic progress
+              return
+              SingleChildScrollView(
+              child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+              SizedBox(height: 10),
 
-    SizedBox(height: 20),
+                // Progress Indicator
+                ProgressIndicatorWidget(progress: progress),
 
-    // Bar Chart
-    _barChart(),
+              SizedBox(height: 20),
 
-    SizedBox(height: 20),
+              // Bar Chart
+                _barChart(),
 
-    // Drink Counter with BLoC
-    _drinkCounter(),
+              SizedBox(height: 20),
 
-    SizedBox(height: 20),
+              // Drink Counter with BLoC
 
-    // Action Grid
-    _actionGrid(),
+              _drinkCounter(),
 
-    SizedBox(height: 20),
-    ],
-    ),
-    );
-    }
-    )
+              SizedBox(height: 20),
 
+              // Action Grid
+                _glassContainer(child: ActionGrid()),
+              //_actionGrid(),
 
+              SizedBox(height: 20),
+              ],
+              ),
+              );
+              }
+              )
+          ]
+          ),
+        );
         // Bottom Navigation Bar
       //  bottomNavigationBar: _bottomNavigation(),
 
-    );
+
   }
 
   // Progress Indicator
@@ -89,10 +109,10 @@ class DrinkLessDashboard extends StatelessWidget {
   Widget _barChart() {
     return Container(
       height: 200,
-      padding: EdgeInsets.all(16),
-      margin: EdgeInsets.symmetric(horizontal: 16),
+      padding: EdgeInsets.all(5),
+      margin: EdgeInsets.symmetric(horizontal: 5),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Colors.transparent,
         borderRadius: BorderRadius.circular(10),
       ),
       child: BarChart(
@@ -104,16 +124,20 @@ class DrinkLessDashboard extends StatelessWidget {
             _barData(3, 5),
             _barData(4, 6),
           ],
-         /* titlesData: FlTitlesData(
-            leftTitles: SideTitles(showTitles: true, reservedSize: 30),
-            bottomTitles: SideTitles(
-              showTitles: true,
-              getTitles: (value) {
-                List<String> days = ["Mon", "Tue", "Wed", "Thu", "Fri"];
-                return days[value.toInt()];
-              },
+          titlesData: FlTitlesData(
+            leftTitles: AxisTitles(
+              sideTitles: SideTitles(showTitles: true, reservedSize: 30),
             ),
-          ),*/
+            bottomTitles: AxisTitles(
+              sideTitles: SideTitles(
+                showTitles: true,
+                getTitlesWidget: (value, meta) {
+                  List<String> days = ["Mon", "Tue", "Wed", "Thu", "Fri"];
+                  return Text(days[value.toInt()], style: TextStyle(fontSize: 12,color: Colors.white));
+                },
+              ),
+            ),
+          ),
         ),
       ),
     );
@@ -128,6 +152,7 @@ class DrinkLessDashboard extends StatelessWidget {
     );
   }
 
+
   // Increment/Decrement Drink Counter using BLoC
   Widget _drinkCounter() {
     return  BlocBuilder<DrinkCounterBloc, DrinkCounterState>(
@@ -136,13 +161,17 @@ class DrinkLessDashboard extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           margin: EdgeInsets.symmetric(horizontal: 20),
           decoration: BoxDecoration(
-            color: Colors.white,
+            gradient: LinearGradient(
+              colors: [Colors.white, Colors.white],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
             borderRadius: BorderRadius.circular(30),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Icon(Icons.local_drink, size: 30, color: Colors.blue),
+              Icon(Icons.wine_bar_rounded, size: 30, color: Colors.blue),
               IconButton(
                 icon: Icon(Icons.remove_circle, size: 30, color: Colors.redAccent),
                 onPressed: () {
@@ -179,10 +208,11 @@ class DrinkLessDashboard extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: GridView.builder(
         shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
         itemCount: actions.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3,
-          childAspectRatio: 1.2,
+          childAspectRatio: 1.0,
         ),
         itemBuilder: (context, index) {
           return Column(
@@ -197,6 +227,27 @@ class DrinkLessDashboard extends StatelessWidget {
             ],
           );
         },
+      ),
+    );
+  }
+
+  Widget _glassContainer({required Widget child}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(20),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15), // Blur effect
+          child: Container(
+            padding: EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.1), // Transparent white with opacity
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(color: Colors.white.withOpacity(0.2)), // Subtle border
+            ),
+            child: child,
+          ),
+        ),
       ),
     );
   }

@@ -6,13 +6,13 @@ import 'bottom_menu/calendar.dart';
 import 'bottom_menu/drink_buddy.dart';
 import 'bottom_menu/modules.dart';
 import 'bottom_menu/profile.dart';
-import 'drink_less_dashboard.dart';
+import 'bottom_menu/drink_less_dashboard.dart';
 
 
 class BottomNavScreen extends StatelessWidget {
   final List<Widget> _screens = [
     DrinkLessDashboard(),
-    ModulesScreen(),
+    ModuleScreen(),
     DrinkBuddyScreen(),
     CalendarScreen(),
     ProfileScreen(),
@@ -26,7 +26,7 @@ class BottomNavScreen extends StatelessWidget {
           body: _screens[state.selectedIndex],
           bottomNavigationBar: BottomNavigationBar(
             type: BottomNavigationBarType.shifting, // Fixed
-            backgroundColor: Colors.white,
+            backgroundColor: Colors.transparent,
             selectedItemColor: Colors.blue,
             unselectedItemColor: Colors.grey,
             currentIndex: state.selectedIndex,
