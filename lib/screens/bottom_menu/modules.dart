@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
-import 'dart:async';
 import '../../bloc/module_bloc/module_bloc.dart';
 import '../../bloc/module_bloc/module_event.dart';
 import '../../bloc/module_bloc/module_state.dart';
 import '../../common/asset_image_path.dart';
 import '../../common/strings.dart';
 import '../../models/modules_model.dart';
-import '../../widgets/animated_card.dart';
 import '../../widgets/appbar.dart';
 
 
@@ -84,24 +81,7 @@ class ModuleScreen extends StatelessWidget {
                             itemCount: modules.length,
                             itemBuilder: (context, index) {
                               final module = modules[index];
-
-                              return /*AnimatedOpacity(
-                                duration: Duration(milliseconds: 300),
-                               opacity: module.isLocked ? 1.0 : 1.0,
-                                child: SlideTransition(
-                                  position: Tween<Offset>(
-                                    begin: Offset(1, 0),
-                                    end: Offset(0, 0),
-                                  ).animate(
-                                    CurvedAnimation(
-                                      parent: AnimationController(
-                                        duration: Duration(milliseconds: 500),
-                                        vsync: Scaffold.of(context),
-                                      )..forward(),
-                                      curve: Curves.easeInOut,
-                                    ),
-                                  ),
-                                  child: */
+                              return
                                   Card(
                                     child: ListTile(
                                       title: Text(module.title),
@@ -113,7 +93,6 @@ class ModuleScreen extends StatelessWidget {
                                           ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(content: Text("You already unlocked, ${module.title} Module!"), backgroundColor: Colors.green),
                                       )
-
                                           /*BlocProvider.of<ModuleBloc>(context)
                                           .add(UnlockModule(index))*/
                                           : null,
@@ -139,7 +118,7 @@ class ModuleScreen extends StatelessWidget {
 }
 
 
-// 🔹 Grid Card with Image & Title
+// Grid Card with Image & Title
 class GridCard extends StatelessWidget {
   final String title;
   final String imageUrl;

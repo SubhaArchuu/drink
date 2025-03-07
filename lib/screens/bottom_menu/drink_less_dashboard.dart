@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:drink_control/common/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,8 +7,6 @@ import '../../bloc/drink_counter_bloc/drink_counter_bloc.dart';
 import '../../widgets/action_grid.dart';
 import '../../widgets/appbar.dart';
 import '../../widgets/progress_widget.dart';
-
-
 
 class DrinkLessDashboard extends StatelessWidget {
   @override
@@ -21,7 +18,6 @@ class DrinkLessDashboard extends StatelessWidget {
           profile: true,
           child: Stack(
             children: [
-          // 🎨 Gradient Background
           Container(
           decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -71,39 +67,10 @@ class DrinkLessDashboard extends StatelessWidget {
           ]
           ),
         );
-        // Bottom Navigation Bar
-      //  bottomNavigationBar: _bottomNavigation(),
 
 
   }
 
-  // Progress Indicator
-  Widget _progressIndicator() {
-    return Column(
-      children: [
-        Text("Plan Progress",
-            style: TextStyle(fontSize: 22, color: Colors.white, fontWeight: FontWeight.bold)),
-        Text("Drink less, Save Money", style: TextStyle(color: Colors.white70)),
-        SizedBox(height: 10),
-        Stack(
-          alignment: Alignment.center,
-          children: [
-            SizedBox(
-              height: 120,
-              width: 120,
-              child: CircularProgressIndicator(
-                value: 0.87, // 87% progress
-                strokeWidth: 10,
-                backgroundColor: Colors.white24,
-                color: Colors.greenAccent,
-              ),
-            ),
-            Text("87%", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white)),
-          ],
-        ),
-      ],
-    );
-  }
 
   // Bar Chart
   Widget _barChart() {
@@ -193,44 +160,6 @@ class DrinkLessDashboard extends StatelessWidget {
     );
   }
 
-  // Action Grid
-  Widget _actionGrid() {
-    List<Map<String, dynamic>> actions = [
-      {"icon": Icons.flag, "label": "Add Goal"},
-      {"icon": Icons.grain, "label": "My Training"},
-      {"icon": Icons.lightbulb, "label": "Reflect"},
-      {"icon": Icons.bar_chart, "label": "My Progress"},
-      {"icon": Icons.phone, "label": "Helpline"},
-      {"icon": Icons.sos, "label": "SOS", "color": Colors.redAccent},
-    ];
-
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: GridView.builder(
-        shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
-        itemCount: actions.length,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-          childAspectRatio: 1.0,
-        ),
-        itemBuilder: (context, index) {
-          return Column(
-            children: [
-              CircleAvatar(
-                radius: 25,
-                backgroundColor: actions[index]["color"] ?? Colors.blue,
-                child: Icon(actions[index]["icon"], color: Colors.white, size: 30),
-              ),
-              SizedBox(height: 5),
-              Text(actions[index]["label"], style: TextStyle(color: Colors.white, fontSize: 12)),
-            ],
-          );
-        },
-      ),
-    );
-  }
-
   Widget _glassContainer({required Widget child}) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -252,22 +181,4 @@ class DrinkLessDashboard extends StatelessWidget {
     );
   }
 
-  /*// Bottom Navigation Bar
-  Widget _bottomNavigation() {
-    return BottomNavigationBar(
-      selectedItemColor: Colors.blueAccent,
-      unselectedItemColor: Colors.grey,
-      currentIndex: _currentIndex,
-      onTap: (index) {
-        context.read<BottomNavigationBloc>().add(ChangeTabEvent(index));
-      },
-      items: [
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-        BottomNavigationBarItem(icon: Icon(Icons.dashboard), label: "Modules"),
-        BottomNavigationBarItem(icon: Icon(Icons.group), label: "Drink Buddy"),
-        BottomNavigationBarItem(icon: Icon(Icons.calendar_today), label: "Calendar"),
-        BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
-      ],
-    );
-  }*/
 }

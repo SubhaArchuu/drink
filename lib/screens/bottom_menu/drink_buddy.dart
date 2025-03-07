@@ -8,8 +8,6 @@ import '../../common/strings.dart';
 import '../../widgets/appbar.dart';
 import 'drink_less_dashboard.dart';
 
-
-
 class DrinkBuddyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -31,7 +29,6 @@ class DrinkBuddyScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               SizedBox(height: 50), // Adjust spacing
-
               _glassContainer(child: _welcomeMessage()),
               SizedBox(height: 10),
               _quickLinks(context),

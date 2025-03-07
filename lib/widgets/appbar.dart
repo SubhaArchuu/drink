@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../common/asset_image_path.dart';
+
 class AppbarWidget extends StatelessWidget {
   final String title;
   final Widget child;
@@ -11,7 +13,6 @@ class AppbarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    //  backgroundColor: Colors.blue.shade900,
       appBar: AppBar(
         elevation: 3,
         backgroundColor: Colors.deepPurple,
@@ -29,7 +30,8 @@ class AppbarWidget extends StatelessWidget {
           if (profile) Padding(
             padding: const EdgeInsets.only(right: 10),
             child: CircleAvatar(
-              backgroundImage: AssetImage("assets/images/user_profile.png"),
+              backgroundImage: AssetImage(AssetImgPath
+                  .userProfile),
               radius: 18,
               backgroundColor: Colors.white
             ),

@@ -32,11 +32,10 @@ void main() {
 class DrinkControlApp extends StatelessWidget {
   const DrinkControlApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-        designSize: const Size(375, 812), // Adjust based on your design
+        designSize: const Size(375, 812),
     minTextAdapt: true,
     splitScreenMode: true,
     builder: (context, child) {
@@ -57,13 +56,6 @@ class DrinkControlApp extends StatelessWidget {
     ),
     debugShowCheckedModeBanner: false,
     initialRoute: '/',
-    /* routes: {
-          '/': (context) => DrinkLessDashboard(),
-          '/modules': (context) => ModulesScreen(),
-          '/drinkBuddy': (context) => DrinkBuddyScreen(),
-          '/calendar': (context) => CalendarScreen(),
-          '/profile': (context) => ProfileScreen(),
-        },*/
     routes: {
     '/': (context) => SplashScreen(),
     '/home': (context) => BottomNavScreen(),
@@ -74,7 +66,6 @@ class DrinkControlApp extends StatelessWidget {
     "/helpline": (context) => HelplineScreen(),
     "/sos": (context) => SosScreen(),
     },
-    // home: BottomNavScreen()
     )
     );
     });

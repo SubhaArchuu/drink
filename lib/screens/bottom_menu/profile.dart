@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-
 import '../../common/strings.dart';
 import '../../widgets/appbar.dart';
 
@@ -41,7 +40,6 @@ class ProfileScreen extends StatelessWidget {
         .of(context)
         .brightness == Brightness.dark;
     //backgroundColor: isDarkMode ? Colors.black87 : Colors.white,
-
     return
       AppbarWidget(
         title: Strings.dashboard_screen,

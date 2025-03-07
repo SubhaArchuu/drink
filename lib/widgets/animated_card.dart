@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../common/asset_image_path.dart';
 
 class AnimatedCard extends StatefulWidget {
@@ -20,20 +19,6 @@ class _AnimatedCardState extends State<AnimatedCard> {
   @override
   Widget build(BuildContext context) {
     return
-      /*Slidable(
-      endActionPane: ActionPane(
-        motion: StretchMotion(),
-        children: [
-          SlidableAction(
-            onPressed: (context) => widget.onDelete(),
-            backgroundColor: Colors.red,
-            foregroundColor: Colors.white,
-            icon: Icons.delete,
-            label: 'Delete',
-          ),
-        ],
-      ),
-      child: */
       GestureDetector(
         onTap: () {
           setState(() {
@@ -63,28 +48,13 @@ class _AnimatedCardState extends State<AnimatedCard> {
                     image: AssetImage(
                         AssetImgPath
                             .userProfile))),
-                /*Image.network(
-                  widget.imageUrl,
-                  height: 80,
-                  width: 80,
-                  fit: BoxFit.cover,
-                ),*/
+
               SizedBox(height: 10),
               Text(
                 widget.title,
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
-              /*SizedBox(height: 5),
-              AnimatedOpacity(
-                opacity: isExpanded ? 1.0 : 0.0,
-                duration: Duration(milliseconds: 300),
-                child: Text(
-                  'Tap to toggle description.',
-                  style: TextStyle(color: Colors.grey[700], fontSize: 12),
-                  textAlign: TextAlign.center,
-                ),
-              ),*/
             ],
           ),
         ),

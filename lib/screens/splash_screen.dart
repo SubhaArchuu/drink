@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../common/strings.dart';
-import '../widgets/appbar.dart';
-
+import '../common/asset_image_path.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -72,11 +70,20 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                   // Animated Logo/Icon
                   ScaleTransition(
                     scale: _scaleAnimation,
-                    child: Icon(
+                    child:
+                        Image(
+                            height: 80,
+                            width: 80,
+                            fit: BoxFit.cover,
+                            image: AssetImage(
+                                AssetImgPath
+                                    .app_icon)),
+
+                    /*Icon(
                       Icons.local_drink,
                       size: 120.sp,
                       color: Colors.white,
-                    ),
+                    ),*/
                   ),
 
                   SizedBox(height: 20.h),

@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:table_calendar/table_calendar.dart';
-
 import '../../bloc/calendar_bloc/calendar_bloc.dart';
 import '../../common/strings.dart';
 import '../../widgets/appbar.dart';
-
-
 class CalendarScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -59,23 +56,18 @@ class CalendarScreen extends StatelessWidget {
                         weekdayStyle: TextStyle(color: Colors.green.shade700, fontWeight: FontWeight.w600),
                         weekendStyle: TextStyle(color: Colors.red.shade700, fontWeight: FontWeight.w600),
                       ),
-
                       availableGestures: AvailableGestures.all,
-
                       focusedDay: state.selectedDay,
                       firstDay: DateTime.utc(2020, 1, 1),
                       lastDay: DateTime.utc(2030, 12, 31),
-
                       selectedDayPredicate: (day) => isSameDay(state.selectedDay, day),
                       onDaySelected: (selectedDay, focusedDay) {
                         context.read<CalendarBloc>().add(DaySelected(selectedDay));
                       },
-
                       calendarBuilders: CalendarBuilders(
                         // Drink Count Marker on Top-Left
                         markerBuilder: (context, date, events) {
                           int? drinkCount = state.drinkLog[date];
-
                           if (drinkCount != null) {
                             return Align(
                               alignment: Alignment.topLeft, // Ensure correct positioning
@@ -130,25 +122,16 @@ class CalendarScreen extends StatelessWidget {
 
                         // Today’s Date
                         todayTextStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-                        /*todayDecoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [Colors.blueAccent, Colors.lightBlue],
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                          ),
-                          shape: BoxShape.circle,
-                        ),*/
                         todayDecoration: BoxDecoration(
                           color: Colors.blueAccent,
                           shape: BoxShape.circle,
                         ),
 
                         defaultDecoration: BoxDecoration(
-                          shape: BoxShape.circle,  // Ensures all dates remain circular
-                          color: Colors.transparent, // No extra background margin
+                          shape: BoxShape.circle,
+                          color: Colors.transparent,
                         ),
 
-                        // Selected Day with Smooth Highlight
                         selectedTextStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                         selectedDecoration: BoxDecoration(
                           color: Colors.green,
@@ -157,16 +140,13 @@ class CalendarScreen extends StatelessWidget {
                         ),
 
                         // Default Day Decorations
-                        outsideDaysVisible: false, // Hide days outside current month
+                        outsideDaysVisible: false,
                       ),
                     ),
                   ),
 
                   SizedBox(height: 20),
-                  /*Text(
-                    "Drinks logged on ${state.selectedDay.toLocal().toString().split(' ')[0]}: ${state.drinkLog[state.selectedDay] ?? 0}",
-                    style: TextStyle(fontSize: 18),
-                  ),*/
+
                   ElevatedButton(
                     onPressed: () {
                       DateTime today = DateTime.now();
