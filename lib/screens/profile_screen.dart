@@ -158,8 +158,8 @@ class _MyProfileAppState extends State<MyProfileApp>{
                      backgroundColor: Colors.deepPurple
                  ),
                  onPressed: (){},
-                 child: ListTile(leading: Icon(Icons.copy,color: Colors.grey),
-                     title: Text("Copy Profile Url",style: TextStyle(color: Colors.grey,))
+                 child: ListTile(leading: Icon(Icons.View,color: Colors.grey),
+                     title: Text("Profile View",style: TextStyle(color: Colors.grey,))
                  )),
            ),
          ],
