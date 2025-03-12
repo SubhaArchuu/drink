@@ -29,6 +29,9 @@ dependencies:
   google_fonts: ^6.2.1
   flutter_screenutil: ^5.9.3
   flutter_launcher_icons: ^0.14.3
+  dotted_border: ^2.1.0
+  flutter_custom_clippers: ^2.1.0
+  font_awesome_flutter: ^10.8.0
 
 
 
